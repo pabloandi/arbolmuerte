@@ -1,5 +1,5 @@
 from pathlib import Path
-# from rama import Rama
+from rama import Rama
 
 import pygame
 
@@ -14,6 +14,7 @@ class Arbol:
     def pintar(self, screen):
         self.screen = screen
         self.pintar_tronco()
+        self.pintar_ramas()
 
     def pintar_tronco(self):
         MARRON =  pygame.Color('BROWN')
@@ -25,9 +26,9 @@ class Arbol:
         ))
 
     def pintar_ramas(self):
-        pass
-        # for secuencia in self.archivos_secuencias:
-            # rama = Rama(self.screen, secuencia)
+        # pass
+        for secuencia in self.archivos_secuencias[:10]:
+            Rama(self.screen, secuencia)
 
 if __name__ == '__main__':
     arbol = Arbol()

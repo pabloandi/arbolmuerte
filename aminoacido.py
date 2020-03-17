@@ -1,11 +1,9 @@
-from pygame.font import SysFont
 from pygame.color import Color
+from pygame import freetype
 
 
 class Aminoacido:
     """Clase Aminoácido para dibujar el color y establecer la letra"""
-
-    font = SysFont("monospace", 12)
 
     def __init__(self, screen, aminoacido, pos):
         self.screen = screen
@@ -46,6 +44,12 @@ class Aminoacido:
             self.color = self.otro
             self.posicion = x, y + paso
 
+    def getPosicionActual(self):
+        return self.posicion
+
+
 
     def draw(self):
-        Aminoacido.font.render_to(surf=self.screen, dest=self.posicion, text=self.aminoacido, fgcolor=self.color)
+        freetype.init()
+        font = freetype.Font(None, 12)
+        font.render_to(surf=self.screen, dest=self.posicion, text=self.aminoacido, fgcolor=self.color)

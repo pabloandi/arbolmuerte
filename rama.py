@@ -15,25 +15,26 @@ class Rama:
         self.camino = []
         self.screen = screen
         self.limites = screen.get_size()
+        self.leer_archivo()
+        self.crear_camino()
 
     def leer_archivo(self):
         try:
-            self.secuencia = SeqIo.read(archivo,'genbank').seq
+            self.secuencia = SeqIO.read(self.archivo,'genbank').seq
         except Exception as e:
             pass
 
     def crear_camino(self):
-        r=0
-        theta=0
+        limx,limy = self.limites
+        partx = int(limx/2)
+        x,y=partx,limy-200
 
-        for aminoacido in self.secuencia:
-            x = r * cos(theta)
-            y = r * sin(theta)
+        for aminoacido in self.secuencia[:100]:
 
-            Aminoacido(self.screen, aminoacido, (x,y))
+            am=Aminoacido(self.screen, aminoacido, (x,y))
+            x,y = am.getPosicionActual()
 
-            r += 0.02
-            theta += 0.02
+
 
     def draw(self):
         pass
