@@ -1,14 +1,15 @@
-from Bio.Seq import Seq
 from Bio import SeqIO
 
-from math import sin, cos
 from aminoacido import Aminoacido
-from math import sin,cos
-
-import pygame
 
 class Rama:
+    """
+    Cada rama del arbol esta asociada a una secuencia de ADN.
+    El archivo de la secuencia de ADN está en formato Genbank.
+    La mayoría de los archivos provienen de NCBI Genome Project
+    https://www.ncbi.nlm.nih.gov/genome/
 
+    """
     def __init__(self, screen, archivo ):
         self.archivo = archivo
         self.secuencia = []
@@ -17,27 +18,31 @@ class Rama:
         self.limites = screen.get_size()
         self.leer_archivo()
         self.crear_camino()
+        self.limite_aminoacidos = 150
 
     def leer_archivo(self):
+        """
+        Lee el archivo de la secuencia con la que fue
+        asociado esta rama
+        :return:
+        """
         try:
             self.secuencia = SeqIO.read(self.archivo,'genbank').seq
         except Exception as e:
             pass
 
     def crear_camino(self):
+        """
+        Crea el camino de la secuencia.
+        Inicia a partir del tope del tronco del arbol
+        :return:
+        """
         limx,limy = self.limites
         partx = int(limx/2)
-        x,y=partx,limy-200
+        x,y=partx,limy-60
 
-        for aminoacido in self.secuencia[:100]:
+        for aminoacido in self.secuencia[:self.limite_aminoacidos]:
 
             am=Aminoacido(self.screen, aminoacido, (x,y))
             x,y = am.getPosicionActual()
-
-
-
-    def draw(self):
-        pass
-
-if __name__ == '__main__':
-    pass
+            del am
