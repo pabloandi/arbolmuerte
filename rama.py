@@ -16,9 +16,10 @@ class Rama:
         self.camino = []
         self.screen = screen
         self.limites = screen.get_size()
+        self.limite_aminoacidos = 150
         self.leer_archivo()
         self.crear_camino()
-        self.limite_aminoacidos = 150
+        
 
     def leer_archivo(self):
         """
