@@ -28,7 +28,7 @@ class Lienzo:
         pass
 
     def on_render(self):
-        self._display_surf.fill(pygame.Color('lightgrey'))
+        self._display_surf.fill(pygame.Color('white'))
         self.arbol.pintar(self._display_surf)
         pygame.display.update()
 
